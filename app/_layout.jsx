@@ -4,8 +4,8 @@ import 'react-native-gesture-handler';
 import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet } from 'react-native';
 import GlobalProvider from '../Context/GlobalProvider';
+
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -21,7 +21,10 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if (error) throw error;
+    if (error) {
+      console.error(error);
+      return;
+    }
 
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -41,7 +44,8 @@ const RootLayout = () => {
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
-      </GlobalProvider>
+    </GlobalProvider>
   );
 };
 
+export default RootLayout;

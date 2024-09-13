@@ -1,18 +1,18 @@
+import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { images } from '../constants';
-import CustomButton from '../components/CustomButton'; 
-import { Redirect, router } from 'expo-router';
+import CustomButton from '../components/CustomButton';
+import { router } from 'expo-router';
 import { useGlobalContext } from '../Context/GlobalProvider';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000', 
+    backgroundColor: '#000000',
   },
   centeredView: {
     flex: 1,
@@ -34,17 +34,17 @@ const styles = StyleSheet.create({
   },
   textHeading: {
     fontSize: 24,
-    color: '#FFFFFF', // Blanco como en SignIn
+    color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 5,
   },
   textHighlight: {
-    color: '#6A0D91', // Morado como en SignIn
+    color: '#6A0D91',
   },
   textSubheading: {
     fontSize: 14,
-    color: '#B5B5B5', // Gris claro como en SignIn
+    color: '#B5B5B5',
     textAlign: 'center',
     marginTop: 7,
   },
@@ -61,9 +61,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function App() {
-  const {isLoading, isLoggedIn} = useGlobalContext();
-  if  (!isLoading && isLoggedIn) return <Redirect href ="/home"/>
+export default function SignIn() {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  
+  if (!isLoading && isLoggedIn) {
+    router.push('/home');
+    return null; 
+  }
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
@@ -93,7 +99,7 @@ export default function App() {
             </Text>
             <CustomButton
               handlePress={() => router.push('/sign-in')}
-              containerStyles={styles.buttonContainer} // Ajusta según sea necesario
+              containerStyles={styles.buttonContainer} 
             />
           </View>
         </ScrollView>

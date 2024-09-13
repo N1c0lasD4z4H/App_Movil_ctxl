@@ -1,36 +1,69 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { icons, images } from '../constants'
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'; 
+import { icons } from '../constants'; 
 
-const FormField = ({title, value, placeholder, handleChangeText,  otherStyles, ...props}) => {
+const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, ...props }) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-    const [showPassword, setShowPassword] = useState(false)
   return (
-    <View className={`space-y-2 ${otherStyles}`}>
-      <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
+    <View style={[styles.container, otherStyles]}>
+      <Text style={styles.title}>{title}</Text>
 
-      <View className="border-2 border-purple-500 w-full h-16 px-4 bg-black-100 rounded-2xl 
-      focus:border-secondary items-center flex-row">
-
+      <View style={styles.inputContainer}>
         <TextInput
-        className="flex-1 text-white font-psemibold text-base"
-        value={value}
-        placeholder={placeholder}
-        placeholderTextColor="#7b7b8b"
-        onChangeText={handleChangeText}
-        secureTextEntry={title === 'Password' &&!showPassword}
+          style={styles.input}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor="#7b7b8b"
+          onChangeText={handleChangeText}
+          secureTextEntry={title === 'Password' && !showPassword}
+          {...props} 
         />
 
-        {title === 'Password' &&(
+        {title === 'Password' && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            <Image source={!showPassword ? icons.eye: icons.eyehide} className="w-6 h-6" resizeMode='contain'
-            
+            <Image
+              source={!showPassword ? icons.eye : icons.eyehide}
+              style={styles.icon}
+              resizeMode='contain'
             />
           </TouchableOpacity>
         )}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default FormField
+
+const styles = {
+  container: {
+    marginBottom: 16, 
+  },
+  title: {
+    fontSize: 16,
+    color: '#e0e0e0', 
+    fontWeight: '500',
+  },
+  inputContainer: {
+    borderWidth: 2,
+    borderColor: '#9c27b0', 
+    backgroundColor: '#000000', 
+    borderRadius: 12, 
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    height: 48, 
+  },
+  input: {
+    flex: 1,
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+};
+
+export default FormField;
