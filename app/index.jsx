@@ -6,12 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { images } from '../constants';
 import CustomButton from '../components/CustomButton'; 
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
+import { useGlobalContext } from '../Context/GlobalProvider';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000', // Fondo negro como en SignIn
+    backgroundColor: '#000000', 
   },
   centeredView: {
     flex: 1,
@@ -61,6 +62,8 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
+  const {isLoading, isLoggedIn} = useGlobalContext();
+  if  (!isLoading && isLoggedIn) return <Redirect href ="/home"/>
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>

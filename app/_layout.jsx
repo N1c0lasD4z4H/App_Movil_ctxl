@@ -5,6 +5,7 @@ import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet } from 'react-native';
+import GlobalProvider from '../Context/GlobalProvider';
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -32,25 +33,15 @@ const RootLayout = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <GlobalProvider>
       <StatusBar style="light" backgroundColor="#000000" />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
-     
       </Stack>
-    </View>
+      </GlobalProvider>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-    marginTop: 0, 
-    paddingTop: 0, 
-  },
-});
-
-export default RootLayout;
