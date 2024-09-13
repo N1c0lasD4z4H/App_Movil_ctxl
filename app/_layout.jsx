@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
+import 'react-native-gesture-handler';
 import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
-
-
+import { StatusBar } from 'expo-status-bar';
+import { View, StyleSheet } from 'react-native';
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -30,19 +31,26 @@ const RootLayout = () => {
     return null;
   }
 
-  if (!fontsLoaded && !error) {
-    return null;
-  }
-
   return (
+    <View style={styles.container}>
+      <StatusBar style="light" backgroundColor="#000000" />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
+     
       </Stack>
-
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    marginTop: 0, 
+    paddingTop: 0, 
+  },
+});
 
 export default RootLayout;

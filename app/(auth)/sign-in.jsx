@@ -1,44 +1,43 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, ScrollView } from 'react-native';
+import { Link } from 'expo-router';
 
 const SignIn = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.innerContainer}>
-        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.title}>Inicia Sesión</Text>
         
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="#B5B5B5" // Placeholder color
+          placeholderTextColor="#B5B5B5"
         />
         <TextInput
           style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#B5B5B5" // Placeholder color
+          placeholder="Contraseña"
+          placeholderTextColor="#B5B5B5"
           secureTextEntry
         />
 
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
         
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account?</Text>
-          <TouchableOpacity>
-            <Text style={styles.footerLink}>Sign Up</Text>
-          </TouchableOpacity>
+          <Text style={styles.footerText}>No tienes cuenta?</Text>
+          <Link href="/(auth)/sign-up">
+            <Text style={styles.footerLink}>Regístrate aquí!!</Text>
+          </Link>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000', // Fondo negro
+    backgroundColor: '#000000',
   },
   innerContainer: {
     flexGrow: 1,
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    color: '#6A0D91', // Color morado
+    color: '#6A0D91',
     fontWeight: 'bold',
     marginBottom: 40,
     textAlign: 'center',
@@ -56,20 +55,20 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     borderRadius: 8,
-    backgroundColor: '#333333', // Fondo gris oscuro para los inputs
-    color: '#FFFFFF', // Texto blanco en los inputs
+    backgroundColor: '#333333',
+    color: '#FFFFFF',
     marginBottom: 16,
   },
   button: {
     width: '100%',
     padding: 15,
     borderRadius: 8,
-    backgroundColor: '#6A0D91', // Color morado
+    backgroundColor: '#6A0D91',
     alignItems: 'center',
     marginTop: 16,
   },
   buttonText: {
-    color: '#FFFFFF', // Texto blanco en el botón
+    color: '#FFFFFF',
     fontWeight: 'bold',
   },
   footer: {
@@ -79,10 +78,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#B5B5B5', // Color gris claro
+    color: '#B5B5B5',
   },
   footerLink: {
-    color: '#6A0D91', // Color morado
+    color: '#6A0D91',
     marginLeft: 5,
     fontWeight: 'bold',
   },
